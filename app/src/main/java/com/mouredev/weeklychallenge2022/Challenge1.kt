@@ -21,6 +21,32 @@ package com.mouredev.weeklychallenge2022
  */
 
 
+fun removerTildes(palabra:String):String{
+    var resultado = "";
+
+    for (letra in palabra){
+        if(letra == 'á'){
+            resultado += "a"; 
+        }
+        else if(letra == 'é'){
+            resultado += "e"; 
+        }
+        else if(letra == 'í'){
+            resultado += "i"; 
+        }
+        else if(letra == 'ó'){
+            resultado += "o"; 
+        }
+        else if(letra == 'ú'){
+            resultado += "u"; 
+        }
+        else{
+            resultado += letra; 
+        }
+    }
+    return resultado;
+}
+
 fun comprobadorAnagrama(firstWord:String, palabraDos:String): Boolean{ 
     if(firstWord == palabraDos){ //Si las dos palabras ingresadas son exactamente iguales, no es anagrama. 
         return false; 
@@ -29,9 +55,9 @@ fun comprobadorAnagrama(firstWord:String, palabraDos:String): Boolean{
     var arrModifiedWords = ArrayList<String>(); 
     
     for (i in arrOriginalWords.indices){ 
-        arrModifiedWords.add(arrOriginalWords[i].lowercase().replace("\\s".toRegex(),"").toCharArray().sorted().joinToString("")); 
+        arrModifiedWords.add(removerTildes(arrOriginalWords[i].lowercase().replace("\\s".toRegex(),"")).toCharArray().sorted().joinToString("")); 
     } 
-    
+
     if(arrModifiedWords[0] == arrModifiedWords[1]){ 
         println("SON UN ANAGRAMA!!") 
         return true; 
@@ -43,16 +69,16 @@ fun comprobadorAnagrama(firstWord:String, palabraDos:String): Boolean{
 } 
 
 /* 
+        Algunos anagramas para probar:
     La mona lisa -  amilla asno (Anagrama!) 
     Romanos - Son amor (Anagrama!) 
-    Lamina - Animal (Anagrama!) 
+    Lámina - Animal (Anagrama!) 
     Esponja - Japonés (Anagrama!) 
  */ 
 
-var firstWord = "Lamina"; 
-var secondWord = "Animal"; 
+var firstWord = "lámina"; 
+var secondWord = "aNiMaL"; 
 
-
-fun main() {
-    comprobadorAnagrama(firstWord, secondWord); 
-}
+fun main() { 
+    println(comprobadorAnagrama(firstWord, secondWord)); 
+} 
